@@ -2,7 +2,9 @@ package com.bitcode.a30_12_24_intentdemo_datacommunication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -14,6 +16,8 @@ public class SecondActivity extends AppCompatActivity {
     TextView txtPassword;
     Button btnBack;
     String username, password;
+    EditText edtRollNumber;
+    String extractedRollNumber;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +31,18 @@ public class SecondActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.textViewUsername);
         txtPassword = findViewById(R.id.textViewPassword);
         btnBack = findViewById(R.id.btnBack);
+        edtRollNumber = findViewById(R.id.edtRollNumber);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent();
+                extractedRollNumber = edtRollNumber.getText().toString();
+                i.putExtra("rollnumber",extractedRollNumber);
+                setResult(1,i);
+                finish();
+            }
+        });
     }
 
     private void getAndBindData(){
@@ -39,4 +55,5 @@ public class SecondActivity extends AppCompatActivity {
         txtUsername.setText(username);
         txtPassword.setText(password);
     }
+
 }
